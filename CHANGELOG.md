@@ -5,6 +5,19 @@ All notable changes to WC Product List Table will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.4] - 2025-12-04
+
+### Fixed
+- **Critical: Add to Cart Button Still Not Displaying**: Explicitly render the add to cart button
+- Removed default WooCommerce `woocommerce_template_loop_add_to_cart` hook (priority 10)
+- Now explicitly calling `woocommerce_template_loop_add_to_cart()` in `table_layout_end()` method
+- This ensures the button is rendered in the correct location within our custom HTML structure
+
+### Technical
+- Removed additional WooCommerce hook: `woocommerce_template_loop_add_to_cart` from `woocommerce_after_shop_loop_item`
+- Button now explicitly rendered at priority 100 in our table_layout_end() method
+- Ensures button appears after price in the actions section
+
 ## [2.2.3] - 2025-12-04
 
 ### Fixed

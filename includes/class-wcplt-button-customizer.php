@@ -43,18 +43,17 @@ class WCPLT_Button_Customizer {
 
         // Apply table layout if enabled
         if ( 'yes' === get_option( 'wcplt_enable_table_layout', 'no' ) ) {
-            // Remove default WooCommerce product link wrapper
+            // Remove default WooCommerce hooks that we'll replace
             remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
             remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+            remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
 
             // Add our table layout hooks
             add_action( 'woocommerce_before_shop_loop_item', array( $this, 'table_layout_start' ), 1 );
             add_action( 'woocommerce_shop_loop_item_title', array( $this, 'table_layout_title' ), 10 );
             add_action( 'woocommerce_after_shop_loop_item_title', array( $this, 'table_layout_middle' ), 5 );
             add_action( 'woocommerce_after_shop_loop_item', array( $this, 'table_layout_end' ), 100 );
-
-            // Remove default title to replace with our linked version
-            remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
         }
 
         // Add custom styles
@@ -265,7 +264,12 @@ class WCPLT_Button_Customizer {
      * End table layout wrapper
      */
     public function table_layout_end() {
-        // Close actions and row wrappers (WooCommerce has already added price and button)
+        global $product;
+
+        // Explicitly add the add to cart button
+        woocommerce_template_loop_add_to_cart();
+
+        // Close actions and row wrappers
         echo '</div>'; // .wcplt-table-actions
         echo '</div>'; // .wcplt-table-row
     }
