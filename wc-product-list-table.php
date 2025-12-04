@@ -10,7 +10,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wc-product-list-table
  * Requires at least: 5.0
- * Tested up to: 6.4
+ * Tested up to: 6.9
  * Requires PHP: 7.2
  * WC requires at least: 3.0
  * WC tested up to: 9.0
