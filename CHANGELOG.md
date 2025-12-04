@@ -5,6 +5,24 @@ All notable changes to WC Product List Table will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.3] - 2025-12-04
+
+### Fixed
+- **Critical: Button Text Not Applying**: Removed "Enable Custom Text" checkbox requirement completely
+- Custom button text now applies automatically when entered, regardless of checkbox state
+- Fixes issue where existing installations had checkbox disabled even after v2.3.1 update
+- Button text changes now work immediately for all users without any extra configuration
+
+### Changed
+- Completely removed `wcplt_enable_custom_text` option check from button text logic
+- Simplified button text customization - if text is set, it applies automatically
+- Better user experience - no hidden checkboxes to enable before text works
+
+### Technical
+- Removed checkbox validation from `custom_button_text()` and `custom_single_button_text()` methods
+- Plugin now checks if custom text exists, not if feature is "enabled"
+- Backward compatible - checkbox still exists in settings but no longer controls functionality
+
 ## [2.3.2] - 2025-12-04
 
 ### Fixed

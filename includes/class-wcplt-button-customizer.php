@@ -64,12 +64,7 @@ class WCPLT_Button_Customizer {
      * Customize button text for shop/archive pages
      */
     public function custom_button_text( $text, $product ) {
-        // Check if custom text is enabled
-        if ( 'yes' !== get_option( 'wcplt_enable_custom_text', 'no' ) ) {
-            return $text;
-        }
-
-        // Check for product-level override
+        // Check for product-level override first
         $override_text = get_post_meta( $product->get_id(), '_wcplt_override_text', true );
         if ( 'yes' === $override_text ) {
             $custom_text = get_post_meta( $product->get_id(), '_wcplt_custom_text', true );
@@ -78,17 +73,19 @@ class WCPLT_Button_Customizer {
             }
         }
 
-        // Check if product is out of stock
+        // Get custom text based on product type
+        $product_type = $product->get_type();
+        $custom_text = '';
+
+        // Check if product is out of stock first
         if ( ! $product->is_in_stock() ) {
-            $out_of_stock_text = get_option( 'wcplt_out_of_stock_text', '' );
-            if ( ! empty( $out_of_stock_text ) ) {
-                return $out_of_stock_text;
+            $custom_text = get_option( 'wcplt_out_of_stock_text', '' );
+            if ( ! empty( $custom_text ) ) {
+                return $custom_text;
             }
         }
 
-        // Get custom text based on product type
-        $product_type = $product->get_type();
-
+        // Get button text based on product type
         switch ( $product_type ) {
             case 'simple':
                 $custom_text = get_option( 'wcplt_shop_button_text', '' );
@@ -119,6 +116,7 @@ class WCPLT_Button_Customizer {
                 break;
         }
 
+        // Return custom text if set, otherwise return default WooCommerce text
         return ! empty( $custom_text ) ? $custom_text : $text;
     }
 
@@ -126,12 +124,7 @@ class WCPLT_Button_Customizer {
      * Customize button text for single product pages
      */
     public function custom_single_button_text( $text, $product ) {
-        // Check if custom text is enabled
-        if ( 'yes' !== get_option( 'wcplt_enable_custom_text', 'no' ) ) {
-            return $text;
-        }
-
-        // Check for product-level override
+        // Check for product-level override first
         $override_text = get_post_meta( $product->get_id(), '_wcplt_override_text', true );
         if ( 'yes' === $override_text ) {
             $custom_text = get_post_meta( $product->get_id(), '_wcplt_custom_text', true );
@@ -151,6 +144,7 @@ class WCPLT_Button_Customizer {
         // Get custom text for single product
         $custom_text = get_option( 'wcplt_single_button_text', '' );
 
+        // Return custom text if set, otherwise return default WooCommerce text
         return ! empty( $custom_text ) ? $custom_text : $text;
     }
 
