@@ -12,6 +12,29 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Delete plugin options
 $options = array(
+    // New option keys
+    'wcplt_enable_custom_text',
+    'wcplt_shop_button_text',
+    'wcplt_single_button_text',
+    'wcplt_variable_button_text',
+    'wcplt_grouped_button_text',
+    'wcplt_external_button_text',
+    'wcplt_out_of_stock_text',
+    'wcplt_enable_redirect',
+    'wcplt_redirect_simple',
+    'wcplt_redirect_variable',
+    'wcplt_redirect_grouped',
+    'wcplt_redirect_new_tab',
+    'wcplt_enable_styling',
+    'wcplt_bg_color',
+    'wcplt_text_color',
+    'wcplt_hover_bg_color',
+    'wcplt_hover_text_color',
+    'wcplt_border_radius',
+    'wcplt_padding',
+    'wcplt_custom_css',
+    'wcplt_migration_done',
+    // Old option keys (for backward compatibility)
     'ccb_enable_custom_text',
     'ccb_shop_button_text',
     'ccb_single_button_text',
@@ -42,8 +65,12 @@ foreach ( $options as $option ) {
 global $wpdb;
 
 $wpdb->query(
-    "DELETE FROM {$wpdb->postmeta} 
+    "DELETE FROM {$wpdb->postmeta}
     WHERE meta_key IN (
+        '_wcplt_override_text',
+        '_wcplt_custom_text',
+        '_wcplt_override_redirect',
+        '_wcplt_disable_redirect',
         '_ccb_override_text',
         '_ccb_custom_text',
         '_ccb_override_redirect',

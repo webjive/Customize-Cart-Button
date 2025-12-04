@@ -1,18 +1,20 @@
-=== Customize Cart Button ===
+=== WC Product List Table ===
 Contributors: webjive
-Tags: woocommerce, cart button, customize, redirect, button text
+Tags: woocommerce, product list, cart button, customize, redirect, button text
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Customize WooCommerce "Add to Cart" button text, styling, and redirect to product page instead of adding to cart.
+Powerful WooCommerce product list customization with advanced cart button controls, styling, and redirect functionality.
 
 == Description ==
 
-Customize Cart Button is a powerful WordPress plugin that gives you complete control over your WooCommerce "Add to Cart" buttons. Change button text, customize styling, and redirect customers to product pages instead of adding directly to cart.
+WC Product List Table is a powerful WordPress plugin that gives you complete control over your WooCommerce product displays and "Add to Cart" buttons. Change button text, customize styling, and redirect customers to product pages instead of adding directly to cart.
+
+Formerly known as "Customize Cart Button" - this plugin has been renamed and enhanced for better functionality and clarity.
 
 = Features =
 
@@ -45,6 +47,11 @@ Customize Cart Button is a powerful WordPress plugin that gives you complete con
 * Override redirect settings per product
 * Easy-to-use metabox on product edit screen
 
+**Automatic Migration**
+* Seamlessly upgrades from "Customize Cart Button" plugin
+* All settings automatically migrated on activation
+* No data loss during upgrade
+
 = Use Cases =
 
 * Force customers to view product details before purchasing
@@ -52,6 +59,7 @@ Customize Cart Button is a powerful WordPress plugin that gives you complete con
 * Match button styling to your theme
 * Different button text for different product types
 * Improve conversion by guiding customers through product pages
+* Customize product list table displays
 
 = Perfect For =
 
@@ -60,13 +68,21 @@ Customize Cart Button is a powerful WordPress plugin that gives you complete con
 * Businesses wanting to provide more product information before purchase
 * Stores with custom branding requirements
 * Anyone wanting more control over the shopping experience
+* Professional e-commerce sites requiring advanced customization
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/customize-cart-button`, or install through WordPress plugins screen
+1. Upload the plugin files to `/wp-content/plugins/wc-product-list-table`, or install through WordPress plugins screen
 2. Activate the plugin through 'Plugins' screen in WordPress
-3. Navigate to WooCommerce > Settings > Cart Button to configure
+3. Navigate to WooCommerce > Settings > Product List Table to configure
 4. Enable features and customize settings as needed
+
+= Upgrading from Customize Cart Button =
+
+1. Deactivate the old "Customize Cart Button" plugin
+2. Install and activate "WC Product List Table"
+3. All your settings will be automatically migrated
+4. You can safely delete the old plugin after verifying everything works
 
 == Frequently Asked Questions ==
 
@@ -84,7 +100,7 @@ No. The redirect only affects the button behavior on shop/archive pages. Once on
 
 = Can I disable the redirect for specific products? =
 
-Yes! Each product has override settings in the "Customize Cart Button" metabox where you can enable or disable redirect on a per-product basis.
+Yes! Each product has override settings in the "Product List Table Settings" metabox where you can enable or disable redirect on a per-product basis.
 
 = Does this plugin slow down my site? =
 
@@ -92,7 +108,15 @@ No. The plugin is lightweight and only loads the necessary code. Custom styles a
 
 = Is the plugin translation ready? =
 
-Yes! The plugin is fully translation ready with text domain 'customize-cart-button'.
+Yes! The plugin is fully translation ready with text domain 'wc-product-list-table'.
+
+= What happens to my settings when upgrading from Customize Cart Button? =
+
+All your settings are automatically migrated to the new format when you activate WC Product List Table. Nothing is lost!
+
+= Can I go back to the old plugin? =
+
+While you can revert, the old "Customize Cart Button" plugin is deprecated. We recommend staying with WC Product List Table for continued updates and support.
 
 == Screenshots ==
 
@@ -103,23 +127,37 @@ Yes! The plugin is fully translation ready with text domain 'customize-cart-butt
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial release
+= 2.0.0 - 2025-12-04 =
+* BREAKING: Plugin renamed from "Customize Cart Button" to "WC Product List Table"
+* Added automatic migration system for seamless upgrade
+* Updated all class names and database keys
+* Fixed undefined $args variable bug in redirect functionality
+* Improved code structure and documentation
+* Enhanced settings page labels
+* Updated GitHub repository references
+
+= 1.0.0 - 2024-12-04 =
+* Initial release as "Customize Cart Button"
 * Custom button text functionality
 * Redirect to product page feature
 * Button styling options
 * Per-product override settings
 * WooCommerce settings integration
+* Fixed WooCommerce settings class loading order
+* Fixed array formatting in settings
 
 == Upgrade Notice ==
 
+= 2.0.0 =
+Major update: Plugin renamed to "WC Product List Table" with automatic migration. All your settings will be preserved. Deactivate "Customize Cart Button" before activating this version.
+
 = 1.0.0 =
-Initial release of Customize Cart Button plugin.
+Initial release of the plugin.
 
 == Support ==
 
 For support, please visit: https://web-jive.com/contact
-Or submit an issue on GitHub: https://github.com/webjive/Customize-Cart-Button/issues
+Or submit an issue on GitHub: https://github.com/webjive/WC-Product-List-Table/issues
 
 == Credits ==
 
