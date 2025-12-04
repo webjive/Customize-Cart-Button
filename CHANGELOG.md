@@ -5,6 +5,24 @@ All notable changes to WC Product List Table will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.4] - 2025-12-04
+
+### Fixed
+- **Critical: Button Text Filter Priority**: Increased filter priority from 10 to 99 to ensure custom text overrides all other filters
+- **Text Sanitization**: Added trim() to all get_option() calls to remove any accidental whitespace
+- Fixes issue where button text wasn't applying due to lower priority filters overriding custom text
+- Ensures custom button text now properly overrides WooCommerce defaults and theme customizations
+
+### Changed
+- Filter hook priority increased to 99 for both `woocommerce_product_add_to_cart_text` and `woocommerce_product_single_add_to_cart_text`
+- All option retrieval now uses trim() to handle whitespace consistently
+- More robust text handling to prevent empty string issues
+
+### Technical
+- Modified filter priorities in `__construct()` method from 10 to 99
+- Added trim() wrapper to all get_option() calls for button text options
+- Improved reliability of custom text application across all product types
+
 ## [2.3.3] - 2025-12-04
 
 ### Fixed

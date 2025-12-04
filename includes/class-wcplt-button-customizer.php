@@ -31,9 +31,9 @@ class WCPLT_Button_Customizer {
      * Constructor
      */
     private function __construct() {
-        // Hook into WooCommerce button text filters
-        add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'custom_button_text' ), 10, 2 );
-        add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'custom_single_button_text' ), 10, 2 );
+        // Hook into WooCommerce button text filters with high priority to override other filters
+        add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'custom_button_text' ), 99, 2 );
+        add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'custom_single_button_text' ), 99, 2 );
 
         // Hook into button URL for redirect functionality
         add_filter( 'woocommerce_loop_add_to_cart_link', array( $this, 'redirect_to_product_page' ), 10, 2 );
@@ -88,31 +88,31 @@ class WCPLT_Button_Customizer {
         // Get button text based on product type
         switch ( $product_type ) {
             case 'simple':
-                $custom_text = get_option( 'wcplt_shop_button_text', '' );
+                $custom_text = trim( get_option( 'wcplt_shop_button_text', '' ) );
                 break;
             case 'variable':
-                $custom_text = get_option( 'wcplt_variable_button_text', '' );
+                $custom_text = trim( get_option( 'wcplt_variable_button_text', '' ) );
                 // If no specific variable text, fall back to shop button text
                 if ( empty( $custom_text ) ) {
-                    $custom_text = get_option( 'wcplt_shop_button_text', '' );
+                    $custom_text = trim( get_option( 'wcplt_shop_button_text', '' ) );
                 }
                 break;
             case 'grouped':
-                $custom_text = get_option( 'wcplt_grouped_button_text', '' );
+                $custom_text = trim( get_option( 'wcplt_grouped_button_text', '' ) );
                 // If no specific grouped text, fall back to shop button text
                 if ( empty( $custom_text ) ) {
-                    $custom_text = get_option( 'wcplt_shop_button_text', '' );
+                    $custom_text = trim( get_option( 'wcplt_shop_button_text', '' ) );
                 }
                 break;
             case 'external':
-                $custom_text = get_option( 'wcplt_external_button_text', '' );
+                $custom_text = trim( get_option( 'wcplt_external_button_text', '' ) );
                 // If no specific external text, fall back to shop button text
                 if ( empty( $custom_text ) ) {
-                    $custom_text = get_option( 'wcplt_shop_button_text', '' );
+                    $custom_text = trim( get_option( 'wcplt_shop_button_text', '' ) );
                 }
                 break;
             default:
-                $custom_text = get_option( 'wcplt_shop_button_text', '' );
+                $custom_text = trim( get_option( 'wcplt_shop_button_text', '' ) );
                 break;
         }
 
@@ -135,14 +135,14 @@ class WCPLT_Button_Customizer {
 
         // Check if product is out of stock
         if ( ! $product->is_in_stock() ) {
-            $out_of_stock_text = get_option( 'wcplt_out_of_stock_text', '' );
+            $out_of_stock_text = trim( get_option( 'wcplt_out_of_stock_text', '' ) );
             if ( ! empty( $out_of_stock_text ) ) {
                 return $out_of_stock_text;
             }
         }
 
         // Get custom text for single product
-        $custom_text = get_option( 'wcplt_single_button_text', '' );
+        $custom_text = trim( get_option( 'wcplt_single_button_text', '' ) );
 
         // Return custom text if set, otherwise return default WooCommerce text
         return ! empty( $custom_text ) ? $custom_text : $text;
