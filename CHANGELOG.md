@@ -5,6 +5,38 @@ All notable changes to WC Product List Table will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2025-12-04
+
+### Added
+- **Shortcode Support**: New `[wcplt_products]` and `[wc_product_table]` shortcodes to embed product tables anywhere
+- **11 Shortcode Parameters**: Comprehensive filtering and sorting options
+  - `limit` - Control number of products displayed
+  - `columns` - Set grid layout columns
+  - `orderby` - Sort by date, title, price, popularity, rating
+  - `order` - Ascending or descending sort order
+  - `category` - Filter by product category slug(s)
+  - `tag` - Filter by product tag(s)
+  - `ids` - Display specific product IDs
+  - `skus` - Filter by product SKU(s)
+  - `on_sale` - Show only products on sale
+  - `best_selling` - Display best-selling products
+  - `top_rated` - Show top-rated products
+  - `class` - Add custom CSS classes
+- New shortcode class: `WCPLT_Shortcode` for handling all shortcode functionality
+- Helper method `get_products_by_category()` for category-based filtering
+- Full WP_Query integration with tax_query and meta_query support
+- Automatic application of all plugin settings to shortcode output
+
+### Changed
+- Shortcodes inherit table layout, button styling, and all plugin customizations
+- Improved code organization with dedicated shortcode handler class
+- Enhanced plugin architecture for better extensibility
+
+### Technical
+- Added `includes/class-wcplt-shortcode.php` with complete shortcode functionality
+- Integrated shortcode initialization in main plugin class
+- Version bumped from 2.1.0 to 2.2.0
+
 ## [2.1.0] - 2025-12-04
 
 ### Added
