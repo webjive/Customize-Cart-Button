@@ -43,9 +43,18 @@ class WCPLT_Button_Customizer {
 
         // Apply table layout if enabled
         if ( 'yes' === get_option( 'wcplt_enable_table_layout', 'no' ) ) {
+            // Remove default WooCommerce product link wrapper
+            remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+
+            // Add our table layout hooks
             add_action( 'woocommerce_before_shop_loop_item', array( $this, 'table_layout_start' ), 1 );
-            add_action( 'woocommerce_after_shop_loop_item_title', array( $this, 'table_layout_middle' ), 15 );
+            add_action( 'woocommerce_shop_loop_item_title', array( $this, 'table_layout_title' ), 10 );
+            add_action( 'woocommerce_after_shop_loop_item_title', array( $this, 'table_layout_middle' ), 5 );
             add_action( 'woocommerce_after_shop_loop_item', array( $this, 'table_layout_end' ), 100 );
+
+            // Remove default title to replace with our linked version
+            remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
         }
 
         // Add custom styles
@@ -213,7 +222,22 @@ class WCPLT_Button_Customizer {
     }
 
     /**
-     * Middle table layout - after title, add description and open actions
+     * Render product title with link
+     */
+    public function table_layout_title() {
+        global $product;
+        $product_permalink = get_permalink( $product->get_id() );
+
+        echo '<h2 class="woocommerce-loop-product__title">';
+        echo '<a href="' . esc_url( $product_permalink ) . '">';
+        echo get_the_title();
+        echo '</a>';
+        echo '</h2>';
+    }
+
+    /**
+     * Middle table layout - add description, close content, open actions
+     * Runs at priority 5, BEFORE price (priority 10)
      */
     public function table_layout_middle() {
         global $product;
@@ -232,6 +256,7 @@ class WCPLT_Button_Customizer {
         }
 
         // Close content wrapper and open actions wrapper
+        // This happens BEFORE price (priority 10) so price will be in actions div
         echo '</div>'; // .wcplt-table-content
         echo '<div class="wcplt-table-actions">';
     }

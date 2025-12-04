@@ -5,6 +5,22 @@ All notable changes to WC Product List Table will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.3] - 2025-12-04
+
+### Fixed
+- **Critical: Add to Cart Button Not Displaying (Complete Fix)**: Completely resolved the missing Add to Cart button issue
+- Removed WooCommerce's default product link wrapper that was causing invalid HTML structure
+- Product title now wrapped in its own link, allowing proper separation of content and action sections
+- Price and button now correctly positioned in the actions section on the right side
+
+### Technical
+- Removed default WooCommerce hooks: `woocommerce_template_loop_product_link_open` and `woocommerce_template_loop_product_link_close`
+- Added custom `table_layout_title()` method to render linked product title without wrapping entire product
+- Changed `table_layout_middle()` hook from priority 15 to priority 5 on `woocommerce_after_shop_loop_item_title`
+- This ensures the actions wrapper opens BEFORE price (priority 10) is added, placing price in correct section
+- Restructured to four methods: `table_layout_start()`, `table_layout_title()`, `table_layout_middle()`, `table_layout_end()`
+- HTML structure now properly separates: left side (title, description) from right side (price, button)
+
 ## [2.2.2] - 2025-12-04
 
 ### Fixed
